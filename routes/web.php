@@ -25,3 +25,46 @@ Route::get('hola',
         echo "Hola mi primera ruta en php";
             }
         );
+
+//ruta paises
+Route::get('paises' , function(){
+    $paises=[
+        "Colombia" => [
+            "Capital" => "Bogotá",
+            "Moneda" => "Peso",
+            "Poblacion" => 51.6,
+            "Ciudades" =>[
+                "Medellin",
+                "Cali",
+                "Barranquilla"
+            ]
+        ] ,
+        "Perú"  => [
+            "Capital" => "Lima",
+            "Moneda" => "Sol",
+            "Poblacion" => 32.97,
+            "Ciudades" =>[
+                "Trujillo",
+                "Cusco",
+                "Tacna"
+            ]
+        ] ,
+        "Paraguay" => [
+            "Capital" => "Asunción",
+            "Moneda" => "Guaraní paraguayo",
+            "Poblacion" => 7.133,
+            "Ciudades" =>[
+                "Luque",
+                "San Lorenzo",
+                "Ciudad del Este"
+            ]
+        ] 
+    ];
+//echo "<pre>";
+   // var_dump($paises);
+   // echo "</pre>";
+
+   //mostrar la vista de paises
+   return view('paises')->with("paises", $paises);
+
+});
