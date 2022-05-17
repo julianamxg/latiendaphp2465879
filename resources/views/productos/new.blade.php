@@ -6,7 +6,8 @@
 </div>
 
 <div class="row">
-    <form class="col s8" method="post" action="">
+    <form class="col s8" method="post" action="{{url('productos')}}">
+      @csrf
        <div class="row">
            <div class="input-field col s8">
            <input placeholder="Nombre del producto" id="nombre" name="nombre" type="text">
@@ -27,6 +28,29 @@
                <label class="light-green-text text-darken-3" for="precio">Precio del producto</label>
            </div>
        </div>
+
+       <div class="row">
+         <div class="col s8 input-field">
+           <select name="marca" id="marca">
+              @foreach($marcas as $marca)
+                <option value="{{$marca->id}}">{{ $marca->nombre }}</option>
+              @endforeach
+           </select>
+           <label class="light-green-text text-darken-3" for="Marca">Marca</label>
+           </div>
+       </div>
+
+       <div class="row">
+         <div class="col s8 input-field">
+           <select name="categoria" id="categoria">
+              @foreach($categorias as $categoria)
+                <option value="{{$categoria->id}}" >{{ $categoria->nombre }}</option>
+              @endforeach
+           </select>
+           <label class="light-green-text text-darken-3" for="categoria">Categoria</label>
+         </div>
+       </div>
+
 <div class="row">
        <div class="file-field input-field col s8">
       <div class="btn green lighten-3">
