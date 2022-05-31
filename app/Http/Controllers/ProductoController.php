@@ -46,11 +46,12 @@ class ProductoController extends Controller
     {
         //Definir reglas de validación
         $reglas = [
-           "nombre" => 'required|alpha',
+           "nombre" => 'required|alpha|unique:productos,nombre',
            "desc" => 'required|min:10|max:30',
            "precio" => 'required|numeric',
            "marca" => 'required',
-           "categoria" => 'required'
+           "categoria" => 'required',
+           "imagen" => 'required|image'
         ];
         //Mensajes personalizados por regla
         $mensajes =[
@@ -58,7 +59,9 @@ class ProductoController extends Controller
             "numeric" => "Solo puede ingresar números",
             "alpha" => "Solo se puede ingresar letras",
             "min" => "Ingresa minimo 10 caracteres",
-            "max" => "Ingresa maximo 30 caracteres"
+            "max" => "Ingresa maximo 30 caracteres",
+            "image" => "No se permiten este tipo de archivos",
+            "unique" => "Este nombre ya existe"
         ];
         //Crear el objeto
         $v= Validator::make($r->all(), $reglas, $mensajes);
@@ -72,13 +75,24 @@ class ProductoController extends Controller
                           ->withInput();
 
       }else {
+
+        //analizar el objeto file del request
          //validación correcta
+
+         //asignar a la variable nombre_archivo
+         $nombre_archivo = $r->imagen->getClientOriginalName();
+         $archivo = $r->imagen;
+         //mover el archivo en la carpeta public
+        // var_dump(public_path());
+         $ruta = public_path().'/img';
+         $archivo->move($ruta, $nombre_archivo);
 
          //Crear entidad de producto
         $p = new Producto;
         $p->nombre = $r->nombre;
         $p->desc = $r->desc;
         $p->precio = $r->precio;
+        $p->imagen = $nombre_archivo;
         $p->marca_id = $r->marca;
         $p->categoria_id = $r->categoria;
         //grabar el nuevo producto 
@@ -87,6 +101,7 @@ class ProductoController extends Controller
         return redirect('productos/create')
                     ->with('mensaje' , 'Producto registrado');
       }
+
     }
 
     /**

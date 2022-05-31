@@ -7,7 +7,7 @@
 </div>
 
 <div class="row">
-    <form class="col s8" method="post" action="{{url('productos')}}">
+    <form class="col s8" method="post" action="{{url('productos')}}" enctype="multipart/form-data">
       @csrf
        <div class="row">
            <div class="input-field col s8">
@@ -18,7 +18,7 @@
        </div>
 
        <div class="row">
-          <div class="input-field col s8">
+          <div class="input-field col s8">  
             <textarea name="desc" id="desc" class="materialize-textarea" >{{ old('desc') }}</textarea>
             <label class="light-green-text text-darken-3" for="desc" >Descripción del producto</label>
             <span class="red-text text-darken-3">{{ $errors->first('desc') }}</span>
@@ -68,6 +68,7 @@
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
       </div>
+      <span>{{ $errors->first('imagen') }}</span>
     </div>
     </div>
     
