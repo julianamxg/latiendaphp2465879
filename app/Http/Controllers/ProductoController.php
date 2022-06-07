@@ -19,8 +19,10 @@ class ProductoController extends Controller
     public function index()
     {
         
-        echo "Aqui va a ir el catalogo de productos";
-    }
+//Selección a productos
+$productos = Producto::all();
+return view('productos.index')->with('productos', $productos);
+}
 
     /**
      * Show the form for creating a new resource.
@@ -112,7 +114,10 @@ class ProductoController extends Controller
      */
     public function show($producto)
     {
-        echo "Aqui va la información del producto cuyo id es: $producto";
+       $producto = Producto::find($producto);
+
+
+       return view('productos.details')->with('producto',$producto);
     }
 
     /**
