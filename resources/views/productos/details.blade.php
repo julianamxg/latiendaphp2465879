@@ -1,7 +1,7 @@
 @extends('layouts.menu')
 @section('contenido')
 <div class="row">
-    <h1>{{ $producto->nombre }}</h1>
+    <h1 class="light-green-text text-lighten-3">{{ $producto->nombre }}</h1>
 </div>
 <div class="row">
     <div class="col s8">
@@ -16,20 +16,28 @@
                     </div>
         </div>
    
-        <h3>Marca: {{$producto->marca->nombre}}</h3>
+        <h3 class="light-green-text text-lighten-3">Marca: {{$producto->marca->nombre}}</h3>
         <ul>
             <li>Precio: US {{$producto->precio}}</li>
             <li>Descripción: {{$producto->desc}}</li>
         </ul>
 
+        <style>
+            h3{
+                color:
+            }
+        </style>
+
     </div>
     <div class="col s4">
         <div class="row">
-            <h3>Añadir al carrito</h3>
+            <h3 class="light-green-text text-lighten-3" >Añadir al carrito</h3>
         </div>
     <form action="{{route ('cart.store')}}" method="post">
         @csrf
         <input type="hidden" name="prod_id" value="{{$producto->id}}">
+        <input type="hidden" name="prod_nom" value="{{$producto->nombre}}">
+        <input type="hidden" name="precio" value="{{$producto->precio}}">
         <div class="row">
             <div class="row">
                 <div class="col s4 input-field">

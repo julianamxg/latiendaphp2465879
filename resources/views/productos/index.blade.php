@@ -1,10 +1,19 @@
 @extends('layouts.menu')
 
 @section('contenido')
+
 <link rel="stylesheet" href="../css/index.css">
     <div class="row">
         <h1>Catalogo de productos</h1>
     </div>
+    @if(session('mensajito'))
+<div class="row">
+    <strong>
+        {{session('mensajito')}}
+        <a class="light-green-text text-lighten-3" href="{{route('cart.index')}}">Ir al carrito</a>
+    
+</div>
+@endif
 
     @foreach($productos as $producto)
     <div class="row">
